@@ -30,7 +30,7 @@ variable "azure_bastion_service_name" {
 
 variable "azure_bastion_subnet_address_prefix" {
   description = "The address prefix to use for the Azure Bastion subnet"
-  default     = ""
+  default     = []
 }
 
 variable "tags" {
