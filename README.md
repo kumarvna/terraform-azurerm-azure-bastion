@@ -31,6 +31,7 @@ module "azure-bastion" {
 ```
 
 ## Pre-requisites
+You’re making changes in a project you don’t have write access to.
 
 ### Virtual network
 
