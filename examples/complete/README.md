@@ -7,7 +7,7 @@ Terraform module to create fully platform-managed Azure bastion PaaS service.
 ```hcl
 module "azure-bastion" {
   source  = "kumarvna/azure-bastion/azurerm"
-  version = "1.0.0"
+  version = "1.1.0"
 
   # Resource Group, location, VNet and Subnet details
   resource_group_name  = "rg-shared-westeurope-01"
@@ -15,7 +15,7 @@ module "azure-bastion" {
 
   # Azure bastion server requireemnts
   azure_bastion_service_name          = "mybastion-service"
-  azure_bastion_subnet_address_prefix = ["10.5.0.0/26"]
+  azure_bastion_subnet_address_prefix = ["10.1.5.0/26"]
 
   # Adding TAG's to your Azure resources (Required)
   tags = {
