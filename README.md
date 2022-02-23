@@ -4,6 +4,14 @@ The Azure Bastion service is a fully platform-managed PaaS service that provisio
 
 Azure Bastion deployment is per virtual network, not per subscription/account or virtual machine. Once provisioned an Azure Bastion service in the virtual network, the RDP/SSH experience is available to all the VMs in the same virtual network.
 
+Microsoft first introduced Azure Bastion two years ago in preview as a secure remote desktop solution, which does not require organizations to expose virtual machines using public IP Addresses. Instead, the connectivity to virtual machines is provided through RDP and SSH over the Secure Sockets Layer (SSL) – the base functionality offered in the Basic SKU. Now, the company provide another SKU with Standard including premium features such as:
+
+* Manual scaling of the Virtual Machine (VM) instances, facilitating Bastion connectivity from 2 up to 50 to manage the number of concurrent SSH and RDP sessions Azure Bastion can support.
+
+* Support for IP-based connections – users can provide the IP address of the target VM/VMSS to allow Bastion to manage connectivity within the local/peered virtual network and on-premises and other cloud providers' networks.
+
+* An Azure Bastion admin panel provides the enabling/disabling features accessed by the Bastion host. Furthermore, users can upgrade from Basic to Standard SKU with the panel, configure access to IP-based connection, and manage VM manual scaling.
+
 ## Module Usage
 
 ```hcl
