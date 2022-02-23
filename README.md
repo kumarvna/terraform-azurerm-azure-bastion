@@ -4,12 +4,25 @@ The Azure Bastion service is a fully platform-managed PaaS service that provisio
 
 Azure Bastion deployment is per virtual network, not per subscription/account or virtual machine. Once provisioned an Azure Bastion service in the virtual network, the RDP/SSH experience is available to all the VMs in the same virtual network.
 
+Microsoft first introduced Azure Bastion two years ago in preview as a secure remote desktop solution, which does not require organizations to expose virtual machines using public IP Addresses. Instead, the connectivity to virtual machines is provided through RDP and SSH over the Secure Sockets Layer (SSL) – the base functionality offered in the Basic SKU. Now, the company provide another SKU with Standard including premium features such as:
+
+* Manual scaling of the Virtual Machine (VM) instances, facilitating Bastion connectivity from 2 up to 50 to manage the number of concurrent SSH and RDP sessions Azure Bastion can support.
+
+* Support for IP-based connections – users can provide the IP address of the target VM/VMSS to allow Bastion to manage connectivity within the local/peered virtual network and on-premises and other cloud providers' networks.
+
+* An Azure Bastion admin panel provides the enabling/disabling features accessed by the Bastion host. Furthermore, users can upgrade from Basic to Standard SKU with the panel, configure access to IP-based connection, and manage VM manual scaling.
+
 ## Module Usage
 
 ```hcl
+# Azurerm Provider configuration
+provider "azurerm" {
+  features {}
+}
+
 module "azure-bastion" {
   source  = "kumarvna/azure-bastion/azurerm"
-  version = "1.1.0"
+  version = "1.2.0"
 
   # Resource Group, location, VNet and Subnet details
   resource_group_name  = "rg-shared-westeurope-01"
@@ -18,6 +31,8 @@ module "azure-bastion" {
   # Azure bastion server requireemnts
   azure_bastion_service_name          = "mybastion-service"
   azure_bastion_subnet_address_prefix = ["10.1.5.0/26"]
+  bastion_host_sku                    = "Standard"
+  scale_units                         = 10
 
   # Adding TAG's to your Azure resources (Required)
   tags = {
@@ -68,6 +83,13 @@ Name | Description | Type | Default
 `domain_name_label`|Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system|string|`null`
 `azure_bastion_service_name`|Specifies the name of the Bastion Host|string|`""`
 `azure_bastion_subnet_address_prefix`|The address prefix to use for the Azure Bastion subnet|list|`[]`
+`enable_copy_paste`|Is Copy/Paste feature enabled for the Bastion Host?|string|`true`
+`enable_file_copy`|Is File Copy feature enabled for the Bastion Host. Only supported whne `sku` is `Standard`|string|`false`
+`bastion_host_sku`|The SKU of the Bastion Host. Accepted values are `Basic` and `Standard`"|string|`Basic`
+`enable_ip_connect`|Is IP Connect feature enabled for the Bastion Host?|string|`false`
+`scale_units`|The number of scale units with which to provision the Bastion Host. Possible values are between `2` and `50`. `scale_units` only can be changed when `sku` is `Standard`. `scale_units` is always `2` when `sku` is `Basic`.|string|`2`
+`enable_shareable_link`|Is Shareable Link feature enabled for the Bastion Host. Only supported whne `sku` is `Standard`|string|`false`
+`enable_tunneling`|Is Tunneling feature enabled for the Bastion Host. Only supported whne `sku` is `Standard`|string|`false`
 `tags`|A map of tags to add to all resources|map(string)|`{}`
 
 ## Outputs
