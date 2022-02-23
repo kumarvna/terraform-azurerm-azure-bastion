@@ -1,3 +1,8 @@
+# Azurerm Provider configuration
+provider "azurerm" {
+  features {}
+}
+
 module "azure-bastion" {
   // source  = "kumarvna/azure-bastion/azurerm"
   // version = "1.1.0"
