@@ -33,6 +33,41 @@ variable "azure_bastion_subnet_address_prefix" {
   default     = []
 }
 
+variable "enable_copy_paste" {
+  description = "Is Copy/Paste feature enabled for the Bastion Host?"
+  default     = true
+}
+
+variable "enable_file_copy" {
+  description = "Is File Copy feature enabled for the Bastion Host. Only supported whne `sku` is `Standard`"
+  default     = false
+}
+
+variable "bastion_host_sku" {
+  description = "The SKU of the Bastion Host. Accepted values are `Basic` and `Standard`"
+  default     = "Basic"
+}
+
+variable "enable_ip_connect" {
+  description = "Is IP Connect feature enabled for the Bastion Host?"
+  default     = false
+}
+
+variable "scale_units" {
+  description = "The number of scale units with which to provision the Bastion Host. Possible values are between `2` and `50`. `scale_units` only can be changed when `sku` is `Standard`. `scale_units` is always `2` when `sku` is `Basic`."
+  default     = 2
+}
+
+variable "enable_shareable_link" {
+  description = "Is Shareable Link feature enabled for the Bastion Host. Only supported whne `sku` is `Standard`"
+  default     = false
+}
+
+variable "enable_tunneling" {
+  description = "Is Tunneling feature enabled for the Bastion Host. Only supported whne `sku` is `Standard`"
+  default     = false
+}
+
 variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
