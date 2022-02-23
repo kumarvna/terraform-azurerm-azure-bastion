@@ -41,6 +41,13 @@ resource "azurerm_public_ip" "pip" {
   sku                 = var.public_ip_sku
   domain_name_label   = var.domain_name_label != null ? var.domain_name_label : format("gw%s%s", lower(replace(var.azure_bastion_service_name, "/[[:^alnum:]]/", "")), random_string.str.result)
   tags                = merge({ "ResourceName" = lower("${var.azure_bastion_service_name}-${data.azurerm_resource_group.rg.location}-pip") }, var.tags, )
+
+  lifecycle {
+    ignore_changes = [
+      tags,
+      ip_tags,
+    ]
+  }
 }
 
 #---------------------------------------------

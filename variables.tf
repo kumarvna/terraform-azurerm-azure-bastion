@@ -39,7 +39,7 @@ variable "enable_copy_paste" {
 }
 
 variable "enable_file_copy" {
-  description = "Is File Copy feature enabled for the Bastion Host?"
+  description = "Is File Copy feature enabled for the Bastion Host. Only supported whne `sku` is `Standard`"
   default     = false
 }
 
@@ -64,7 +64,7 @@ variable "enable_shareable_link" {
 }
 
 variable "enable_tunneling" {
-  description = "s Tunneling feature enabled for the Bastion Host. Only supported whne `sku` is `Standard`"
+  description = "Is Tunneling feature enabled for the Bastion Host. Only supported whne `sku` is `Standard`"
   default     = false
 }
 
