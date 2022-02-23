@@ -15,7 +15,7 @@ module "azure-bastion" {
   azure_bastion_service_name          = "mybastion-service"
   azure_bastion_subnet_address_prefix = ["10.1.5.0/26"]
   bastion_host_sku                    = "Standard"
-  scale_units                         = 2
+  scale_units                         = 10
 
   # Adding TAG's to your Azure resources (Required)
   tags = {
