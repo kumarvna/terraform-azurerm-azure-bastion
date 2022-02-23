@@ -1,6 +1,7 @@
 module "azure-bastion" {
-  source  = "kumarvna/azure-bastion/azurerm"
-  version = "1.1.0"
+  // source  = "kumarvna/azure-bastion/azurerm"
+  // version = "1.1.0"
+  source = "../../"
 
   # Resource Group, location, VNet and Subnet details
   resource_group_name  = "rg-shared-westeurope-01"
@@ -9,6 +10,8 @@ module "azure-bastion" {
   # Azure bastion server requireemnts
   azure_bastion_service_name          = "mybastion-service"
   azure_bastion_subnet_address_prefix = ["10.1.5.0/26"]
+  bastion_host_sku                    = "Standard"
+  scale_units                         = 30
 
   # Adding TAG's to your Azure resources (Required)
   tags = {
